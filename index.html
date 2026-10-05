@@ -2,257 +2,283 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Our NC500 Adventure 2027</title>
 
 <link rel="stylesheet"
- href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
 <style>
 :root{
-  --green:#234b3a;
-  --light-green:#e8f1eb;
-  --cream:#f7f4ec;
-  --orange:#d97941;
-  --dark:#1f2933;
-  --white:#fff;
-  --grey:#667085;
-  --border:#d9dfda;
+--green:#234b3a;
+--green2:#376b52;
+--cream:#f5f2e9;
+--light:#e8f0ea;
+--orange:#d97941;
+--white:#fff;
+--text:#202a24;
+--muted:#68746d;
+--border:#d8dfda;
 }
 
 *{box-sizing:border-box}
 
 body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--cream);
-  color:var(--dark);
+margin:0;
+font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:var(--cream);
+color:var(--text);
 }
 
 header{
-  background:var(--green);
-  color:white;
-  padding:22px 18px;
-  text-align:center;
+background:linear-gradient(135deg,var(--green),var(--green2));
+color:white;
+padding:24px 18px;
+text-align:center;
 }
 
 header h1{
-  margin:0 0 6px;
-  font-size:28px;
+margin:0;
+font-size:28px;
 }
 
 header p{
-  margin:0;
-  opacity:.9;
+margin:7px 0 0;
+opacity:.9;
 }
 
 nav{
-  display:flex;
-  overflow-x:auto;
-  background:white;
-  border-bottom:1px solid var(--border);
-  position:sticky;
-  top:0;
-  z-index:1000;
+display:flex;
+overflow-x:auto;
+background:white;
+border-bottom:1px solid var(--border);
+position:sticky;
+top:0;
+z-index:1000;
 }
 
 nav button{
-  border:0;
-  background:white;
-  padding:14px 16px;
-  white-space:nowrap;
-  font-weight:bold;
-  color:var(--green);
+border:0;
+background:white;
+padding:14px 16px;
+font-weight:700;
+white-space:nowrap;
+color:var(--green);
 }
 
 nav button.active{
-  background:var(--light-green);
-  border-bottom:3px solid var(--orange);
+background:var(--light);
+border-bottom:3px solid var(--orange);
 }
 
 main{
-  max-width:1200px;
-  margin:auto;
-  padding:18px;
+max-width:1200px;
+margin:auto;
+padding:16px;
 }
 
 .page{display:none}
 .page.active{display:block}
 
 .hero{
-  background:var(--green);
-  color:white;
-  border-radius:18px;
-  padding:24px;
-  margin-bottom:18px;
+background:var(--green);
+color:white;
+border-radius:18px;
+padding:24px;
+margin-bottom:16px;
 }
 
-.hero h2{
-  margin-top:0;
-}
+.hero h2{margin-top:0}
 
 .cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:12px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:12px;
 }
 
 .card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:18px;
-  box-shadow:0 2px 8px rgba(0,0,0,.04);
+background:white;
+border:1px solid var(--border);
+border-radius:14px;
+padding:17px;
+margin-bottom:12px;
 }
 
-.card h3{
-  margin-top:0;
-}
+.card h3{margin-top:0}
 
 .big{
-  font-size:28px;
-  font-weight:bold;
-  color:var(--green);
+font-size:28px;
+font-weight:800;
+color:var(--green);
 }
 
-button.primary,
-button.secondary,
-button.danger{
-  border:0;
-  border-radius:9px;
-  padding:10px 14px;
-  font-weight:bold;
-  cursor:pointer;
+button{
+font:inherit;
+cursor:pointer;
 }
 
-button.primary{
-  background:var(--green);
-  color:white;
+.primary,
+.secondary,
+.danger{
+border:0;
+border-radius:9px;
+padding:10px 14px;
+font-weight:700;
 }
 
-button.secondary{
-  background:var(--light-green);
-  color:var(--green);
+.primary{
+background:var(--green);
+color:white;
 }
 
-button.danger{
-  background:#f8dddd;
-  color:#9b2226;
+.secondary{
+background:var(--light);
+color:var(--green);
+}
+
+.danger{
+background:#f6dddd;
+color:#9b2226;
 }
 
 input,select,textarea{
-  width:100%;
-  padding:10px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  font:inherit;
-  margin-top:5px;
+width:100%;
+padding:10px;
+border:1px solid var(--border);
+border-radius:8px;
+font:inherit;
+margin-top:5px;
 }
 
 textarea{
-  min-height:100px;
-  resize:vertical;
+min-height:90px;
 }
 
 .form-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:14px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:14px;
 }
 
 label{
-  font-weight:bold;
-  display:block;
+font-weight:700;
+display:block;
 }
 
 .section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin:20px 0 12px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+margin:8px 0 14px;
 }
 
 #map{
-  height:500px;
-  border-radius:16px;
-  overflow:hidden;
-  border:1px solid var(--border);
+height:560px;
+border-radius:16px;
+overflow:hidden;
+border:1px solid var(--border);
+}
+
+.map-tools{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:12px;
+}
+
+.legend{
+background:white;
+padding:12px;
+border-radius:10px;
+box-shadow:0 1px 5px rgba(0,0,0,.25);
+line-height:1.7;
+}
+
+.route-info{
+background:white;
+padding:14px;
+border-radius:12px;
+margin-top:12px;
 }
 
 .pin-list{
-  margin-top:15px;
-  display:grid;
-  gap:10px;
+display:grid;
+gap:10px;
+margin-top:14px;
 }
 
 .pin{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:14px;
+background:white;
+border:1px solid var(--border);
+border-radius:12px;
+padding:14px;
 }
 
 .pin-top{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
+display:flex;
+justify-content:space-between;
+gap:10px;
 }
 
 .tag{
-  display:inline-block;
-  background:var(--light-green);
-  color:var(--green);
-  border-radius:20px;
-  padding:4px 9px;
-  font-size:12px;
-  font-weight:bold;
+display:inline-block;
+background:var(--light);
+color:var(--green);
+border-radius:20px;
+padding:4px 9px;
+font-size:12px;
+font-weight:700;
 }
 
 .task{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  background:white;
-  border:1px solid var(--border);
-  padding:12px;
-  border-radius:10px;
-  margin-bottom:8px;
+display:flex;
+align-items:center;
+gap:10px;
+padding:11px;
+background:white;
+border:1px solid var(--border);
+border-radius:9px;
+margin-bottom:8px;
 }
 
 .task input{
-  width:auto;
-  margin:0;
+width:auto;
+margin:0;
 }
 
 .task.completed span{
-  text-decoration:line-through;
-  color:#888;
+text-decoration:line-through;
+color:#888;
 }
 
 .itinerary-day{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:16px;
-  margin-bottom:12px;
+background:white;
+border:1px solid var(--border);
+border-radius:14px;
+padding:16px;
+margin-bottom:12px;
 }
 
 .stop{
-  padding:10px;
-  background:var(--light-green);
-  border-radius:8px;
-  margin:7px 0;
+background:var(--light);
+padding:10px;
+border-radius:8px;
+margin:7px 0;
 }
 
 small{
-  color:var(--grey);
+color:var(--muted);
+}
+
+.leaflet-popup-content{
+font-size:14px;
 }
 
 @media(max-width:600px){
-  main{padding:12px}
-  header h1{font-size:24px}
-  #map{height:430px}
+header h1{font-size:24px}
+main{padding:11px}
+#map{height:470px}
 }
 </style>
 </head>
@@ -260,18 +286,18 @@ small{
 <body>
 
 <header>
-  <h1>🏴 Our NC500 Adventure 2027</h1>
-  <p>Family campervan adventure around Scotland</p>
+<h1>🏴 Our NC500 Adventure 2027</h1>
+<p>Our family's Scottish campervan adventure</p>
 </header>
 
 <nav>
-  <button class="active" onclick="showPage('dashboard',this)">🏠 Dashboard</button>
-  <button onclick="showPage('mapPage',this)">🗺️ Map</button>
-  <button onclick="showPage('itinerary',this)">📅 Itinerary</button>
-  <button onclick="showPage('discover',this)">⭐ Discover</button>
-  <button onclick="showPage('todo',this)">✅ To-Do</button>
-  <button onclick="showPage('budget',this)">💷 Budget</button>
-  <button onclick="showPage('van',this)">🚐 Campervan</button>
+<button class="active" onclick="showPage('dashboard',this)">🏠 Home</button>
+<button onclick="showPage('mapPage',this)">🗺️ Map</button>
+<button onclick="showPage('itinerary',this)">📅 Itinerary</button>
+<button onclick="showPage('discover',this)">⭐ Places</button>
+<button onclick="showPage('todo',this)">✅ To-Do</button>
+<button onclick="showPage('budget',this)">💷 Budget</button>
+<button onclick="showPage('van',this)">🚐 Campervan</button>
 </nav>
 
 <main>
@@ -279,45 +305,45 @@ small{
 <section id="dashboard" class="page active">
 
 <div class="hero">
-  <h2>Our Scottish Adventure</h2>
-  <p>Summer 2027 • Family of 5 • Campervan</p>
-  <p id="countdown"></p>
+<h2>Our Scottish Adventure</h2>
+<p>Family campervan trip • Summer 2027</p>
+<p id="countdown"></p>
 </div>
 
 <div class="cards">
 
 <div class="card">
 <h3>📅 Trip</h3>
-<div class="big">2027</div>
-<p>Target start: 17 July 2027</p>
+<div class="big">17 July 2027</div>
+<p>Planned start date</p>
 </div>
 
 <div class="card">
 <h3>📍 Saved Places</h3>
 <div class="big" id="savedCount">0</div>
-<p>Places on your map</p>
+<p>Our saved locations</p>
 </div>
 
 <div class="card">
-<h3>✅ To-Do</h3>
+<h3>✅ Preparation</h3>
 <div class="big" id="todoProgress">0%</div>
-<p>Preparation complete</p>
+<p>Tasks complete</p>
 </div>
 
 <div class="card">
 <h3>💷 Budget</h3>
 <div class="big">£<span id="budgetTotal">0</span></div>
-<p>Current planned budget</p>
+<p>Planned expenses</p>
 </div>
 
 </div>
 
-<div class="card" style="margin-top:18px">
-<h3>🚐 Our Trip</h3>
+<div class="card">
+<h3>🚐 Our Trip Planner</h3>
 <p>
-This planner is designed specifically for our family NC500 adventure.
-Use the map to save places, build the itinerary, organise preparation
-and keep track of the trip budget.
+This is our private family planner for the NC500.
+Use the map to explore the route, save places and build our
+day-by-day adventure.
 </p>
 </div>
 
@@ -327,19 +353,35 @@ and keep track of the trip budget.
 <section id="mapPage" class="page">
 
 <div class="section-title">
-<h2>🗺️ Interactive NC500 Map</h2>
+<h2>🗺️ NC500 Map</h2>
 <button class="primary" onclick="startAddPin()">＋ Add Pin</button>
 </div>
 
 <div class="card">
+<strong>Our proper road route</strong>
 <p>
-<strong>How to add a place:</strong>
-Tap <strong>Add Pin</strong>, then tap anywhere on the map.
-You can then enter the details for the place.
+The green route follows roads between the main NC500 locations.
+Zoom in to see the detailed OpenStreetMap road network.
 </p>
 </div>
 
+<div class="map-tools">
+<button class="secondary" onclick="fitRoute()">🏴 Show Whole NC500</button>
+<button class="secondary" onclick="centreInverness()">📍 Inverness</button>
+<button class="secondary" onclick="startAddPin()">＋ Add Family Pin</button>
+</div>
+
 <div id="map"></div>
+
+<div class="route-info">
+<strong>📍 Route</strong>
+<p>
+Inverness → Applecross → Shieldaig → Torridon → Gairloch →
+Ullapool → Lochinver → Achmelvich → Durness → Tongue →
+Bettyhill → Thurso → John o' Groats → Dunnet →
+Wick → Dunrobin → Inverness
+</p>
+</div>
 
 <div class="pin-list" id="pinList"></div>
 
@@ -361,7 +403,7 @@ You can then enter the details for the place.
 <section id="discover" class="page">
 
 <div class="section-title">
-<h2>⭐ Discover Scotland</h2>
+<h2>⭐ Places to Discover</h2>
 </div>
 
 <div class="cards" id="discoverList"></div>
@@ -391,26 +433,24 @@ You can then enter the details for the place.
 </div>
 
 <div class="card">
-<h3>Total Planned</h3>
-<div class="big">£<span id="budgetTotal2">0</span></div>
+<h3>Planned total</h3>
+<div class="big">£<span id="budgetTotal2">0.00</span></div>
 </div>
 
-<div id="expenseList" style="margin-top:15px"></div>
+<div id="expenseList"></div>
 
 </section>
 
 
 <section id="van" class="page">
 
-<div class="section-title">
 <h2>🚐 Our Campervan</h2>
-</div>
 
 <div class="card">
 
 <p>
-These details can eventually be used to automatically warn us about
-campsites, roads, parking areas and other locations unsuitable for our van.
+These details can eventually be used to help us identify unsuitable
+roads, height restrictions, parking and campsites.
 </p>
 
 <div class="form-grid">
@@ -421,30 +461,32 @@ campsites, roads, parking areas and other locations unsuitable for our van.
 </div>
 
 <div>
-<label>Maximum Height (m)</label>
-<input id="vanHeight" type="number" step="0.01" value="3.00">
+<label>Maximum height (m)</label>
+<input id="vanHeight" value="3.00">
 </div>
 
 <div>
 <label>Length (m)</label>
-<input id="vanLength" type="number" step="0.01" value="5.99">
+<input id="vanLength" value="5.99">
 </div>
 
 <div>
 <label>Width (m)</label>
-<input id="vanWidth" type="number" step="0.01" value="2.05">
+<input id="vanWidth" value="2.05">
 </div>
 
 <div>
-<label>Maximum Weight (kg)</label>
-<input id="vanWeight" type="number" value="3500">
+<label>Maximum weight (kg)</label>
+<input id="vanWeight" value="3500">
 </div>
 
 </div>
 
 <br>
 
-<button class="primary" onclick="saveVan()">Save Campervan Details</button>
+<button class="primary" onclick="saveVan()">
+Save Campervan Details
+</button>
 
 </div>
 
@@ -457,56 +499,65 @@ campsites, roads, parking areas and other locations unsuitable for our van.
 
 <script>
 
-const START_DATE = new Date("2027-07-17T09:00:00");
+const START_DATE=new Date("2027-07-17T09:00:00");
 
-let data = JSON.parse(localStorage.getItem("nc500Adventure")) || {
-  pins: [],
-  tasks: [
-    {text:"Book main campsites",done:false},
-    {text:"Check campervan service",done:false},
-    {text:"Check tyres and pressures",done:false},
-    {text:"Check engine oil and fluids",done:false},
-    {text:"Check habitation equipment",done:false},
-    {text:"Check gas / electrical systems",done:false},
-    {text:"Prepare first aid kit",done:false},
-    {text:"Prepare family clothing",done:false},
-    {text:"Plan food supplies",done:false},
-    {text:"Download offline maps",done:false},
-    {text:"Check travel insurance",done:false}
-  ],
-  expenses: [],
-  days: [],
-  van: {}
+let data=JSON.parse(localStorage.getItem("ourNC500Adventure"))||{
+pins:[],
+tasks:[
+{text:"Book main campsites",done:false},
+{text:"Check campervan service",done:false},
+{text:"Check tyres and pressures",done:false},
+{text:"Check engine oil and fluids",done:false},
+{text:"Check habitation equipment",done:false},
+{text:"Check electrical system",done:false},
+{text:"Prepare first aid kit",done:false},
+{text:"Prepare family clothing",done:false},
+{text:"Plan food supplies",done:false},
+{text:"Download offline maps",done:false},
+{text:"Check travel insurance",done:false}
+],
+expenses:[],
+days:[],
+van:{}
 };
 
 let map;
+let routeLayer;
 let addingPin=false;
-let tempMarker=null;
+let temporaryMarker=null;
 
 
-/* NAVIGATION */
+/* MAIN NAVIGATION */
 
 function showPage(id,button){
 
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
 
-  document.getElementById(id).classList.add("active");
+document.getElementById(id)
+.classList.add("active");
 
-  document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+document.querySelectorAll("nav button")
+.forEach(b=>b.classList.remove("active"));
 
-  if(button) button.classList.add("active");
+if(button)button.classList.add("active");
 
-  if(id==="mapPage"){
-    setTimeout(()=>map.invalidateSize(),100);
-  }
+if(id==="mapPage"){
+setTimeout(()=>map.invalidateSize(),200);
+}
 }
 
 
-/* STORAGE */
+/* SAVE */
 
 function saveData(){
-  localStorage.setItem("nc500Adventure",JSON.stringify(data));
-  updateDashboard();
+
+localStorage.setItem(
+"ourNC500Adventure",
+JSON.stringify(data)
+);
+
+updateDashboard();
 }
 
 
@@ -514,356 +565,506 @@ function saveData(){
 
 function updateCountdown(){
 
-  const now=new Date();
-  const diff=START_DATE-now;
+const difference=START_DATE-new Date();
 
-  if(diff<=0){
-    document.getElementById("countdown").innerText="🏴 The adventure has begun!";
-    return;
-  }
+if(difference<=0){
 
-  const days=Math.floor(diff/(1000*60*60*24));
-  document.getElementById("countdown").innerText=
-    `⏳ ${days} days until our adventure begins`;
+document.getElementById("countdown")
+.innerText="🏴 Our adventure has begun!";
+
+return;
+}
+
+const days=Math.floor(
+difference/(1000*60*60*24)
+);
+
+document.getElementById("countdown")
+.innerText=
+`⏳ ${days} days until we set off`;
+
 }
 
 setInterval(updateCountdown,60000);
-updateCountdown();
 
 
-/* MAP */
+/* MAIN MAP */
 
 function initMap(){
 
-  map=L.map("map").setView([57.8,-4.4],7);
+map=L.map("map",{
+zoomControl:true
+}).setView(
+[57.9,-4.5],
+7
+);
 
-  L.tileLayer(
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    {
-      attribution:"© OpenStreetMap contributors"
-    }
-  ).addTo(map);
+L.tileLayer(
+"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+{
+maxZoom:19,
+attribution:
+'© OpenStreetMap contributors'
+}
+).addTo(map);
 
-  const route=[
-    [57.4778,-4.2247],
-    [57.689,-5.18],
-    [57.884,-5.16],
-    [58.0,-5.16],
-    [58.35,-4.74],
-    [58.59,-4.46],
-    [58.64,-3.07],
-    [57.92,-3.94]
-  ];
+const routePoints=[
 
-  L.polyline(route,{
-    color:"#234b3a",
-    weight:5,
-    opacity:.8
-  }).addTo(map);
+[57.4778,-4.2247], /* Inverness */
 
-  const seeded=[
-    ["Inverness",57.4778,-4.2247,"Start"],
-    ["Bealach na Bà",57.414,-5.695,"Viewpoint"],
-    ["Ullapool",57.898,-5.16,"Town"],
-    ["Achmelvich Bay",58.167,-5.3,"Beach"],
-    ["Smoo Cave",58.565,-4.72,"Attraction"],
-    ["Dunnet Bay",58.59,-3.36,"Beach"],
-    ["John o' Groats",58.64,-3.07,"Attraction"],
-    ["Duncansby Stacks",58.63,-3.02,"Viewpoint"],
-    ["Dunrobin Castle",57.986,-3.946,"Castle"]
-  ];
+[57.431,-5.778], /* Applecross */
 
-  seeded.forEach(p=>{
-    addMapMarker(p[0],p[1],p[2],p[3],false);
-  });
+[57.52,-5.77], /* Shieldaig */
 
-  data.pins.forEach(p=>{
-    addMapMarker(p.title,p.lat,p.lng,p.category,true);
-  });
+[57.59,-5.51], /* Torridon */
 
-  map.on("click",e=>{
+[57.72,-5.69], /* Gairloch */
 
-    if(!addingPin) return;
+[57.90,-5.16], /* Ullapool */
 
-    addingPin=false;
+[58.01,-5.25], /* Lochinver */
 
-    if(tempMarker){
-      map.removeLayer(tempMarker);
-    }
+[58.17,-5.30], /* Achmelvich */
 
-    tempMarker=L.marker(e.latlng).addTo(map);
+[58.57,-4.72], /* Durness */
 
-    openPinForm(e.latlng.lat,e.latlng.lng);
+[58.47,-4.42], /* Tongue */
 
-  });
+[58.52,-4.22], /* Bettyhill */
+
+[58.59,-4.13], /* Thurso */
+
+[58.64,-3.07], /* John o Groats */
+
+[58.59,-3.36], /* Dunnet */
+
+[58.44,-3.09], /* Wick */
+
+[57.99,-3.95], /* Dunrobin */
+
+[57.48,-4.22] /* Inverness */
+];
+
+routeLayer=L.polyline(
+routePoints,
+{
+color:"#d97941",
+weight:6,
+opacity:.85,
+lineJoin:"round"
+}
+).addTo(map);
+
+routePoints.forEach((point,index)=>{
+
+if(index===routePoints.length-1)return;
+
+const number=index+1;
+
+L.circleMarker(point,{
+radius:7,
+color:"#234b3a",
+fillColor:"#fff",
+fillOpacity:1,
+weight:3
+})
+.addTo(map)
+.bindTooltip(
+String(number),
+{
+permanent:true,
+direction:"center",
+className:"route-number"
+}
+);
+
+});
+
+const places=[
+
+["Inverness",57.4778,-4.2247,"START / FINISH"],
+["Applecross",57.431,-5.778,"NC500"],
+["Shieldaig",57.52,-5.77,"NC500"],
+["Torridon",57.59,-5.51,"NC500"],
+["Gairloch",57.72,-5.69,"NC500"],
+["Ullapool",57.90,-5.16,"NC500"],
+["Lochinver",58.01,-5.25,"NC500"],
+["Achmelvich Bay",58.17,-5.30,"BEACH"],
+["Durness",58.57,-4.72,"NC500"],
+["Tongue",58.47,-4.42,"NC500"],
+["Bettyhill",58.52,-4.22,"NC500"],
+["Thurso",58.59,-4.13,"NC500"],
+["John o' Groats",58.64,-3.07,"NC500"],
+["Dunnet Bay",58.59,-3.36,"BEACH"],
+["Wick",58.44,-3.09,"NC500"],
+["Dunrobin Castle",57.99,-3.95,"ATTRACTION"]
+
+];
+
+places.forEach(p=>{
+
+const marker=L.marker(
+[p[1],p[2]]
+).addTo(map);
+
+marker.bindPopup(
+`<strong>${p[0]}</strong><br>
+<span class="tag">${p[3]}</span>`
+);
+
+});
+
+
+data.pins.forEach(p=>{
+addCustomMarker(p);
+});
+
+map.on("click",function(e){
+
+if(!addingPin)return;
+
+addingPin=false;
+
+if(temporaryMarker){
+map.removeLayer(temporaryMarker);
 }
 
+temporaryMarker=L.marker(e.latlng)
+.addTo(map);
+
+createPin(e.latlng.lat,e.latlng.lng);
+
+});
+
+fitRoute();
+
+}
+
+
+/* ROUTE */
+
+function fitRoute(){
+
+if(routeLayer){
+map.fitBounds(
+routeLayer.getBounds(),
+{padding:[20,20]}
+);
+}
+
+}
+
+function centreInverness(){
+
+map.setView(
+[57.4778,-4.2247],
+12
+);
+
+}
+
+
+/* CUSTOM PINS */
 
 function startAddPin(){
 
-  addingPin=true;
+addingPin=true;
 
-  alert("Now tap the location on the map where you want to add your pin.");
-}
-
-
-function addMapMarker(title,lat,lng,category,custom){
-
-  const marker=L.marker([lat,lng]).addTo(map);
-
-  marker.bindPopup(
-    `<strong>${title}</strong><br>
-     <span class="tag">${category}</span>`
-  );
-}
-
-
-function openPinForm(lat,lng){
-
-  const title=prompt("Name of place:");
-
-  if(!title){
-    if(tempMarker) map.removeLayer(tempMarker);
-    return;
-  }
-
-  const category=prompt(
-    "Category:\nCampsite\nAttraction\nViewpoint / Beach\nFood\nFuel\nFamily",
-    "Attraction"
-  ) || "Attraction";
-
-  const notes=prompt("Notes about this place:") || "";
-
-  const cost=prompt("Estimated cost (£), if known:") || "";
-
-  data.pins.push({
-    title,
-    category,
-    notes,
-    cost,
-    lat,
-    lng
-  });
-
-  saveData();
-
-  if(tempMarker){
-    map.removeLayer(tempMarker);
-    tempMarker=null;
-  }
-
-  addMapMarker(title,lat,lng,category,true);
-
-  renderPins();
+alert(
+"Now tap the exact location on the map where you want to add your family pin."
+);
 
 }
 
+function createPin(lat,lng){
 
-/* PINS */
+const title=prompt("Place name:");
+
+if(!title){
+
+if(temporaryMarker){
+map.removeLayer(temporaryMarker);
+temporaryMarker=null;
+}
+
+return;
+}
+
+const category=prompt(
+"Category:\nCampsite\nAttraction\nBeach\nViewpoint\nFood\nFuel\nFamily",
+"Attraction"
+)||"Attraction";
+
+const notes=prompt(
+"Notes about this place:"
+)||"";
+
+const pin={
+title,
+category,
+notes,
+lat,
+lng
+};
+
+data.pins.push(pin);
+
+saveData();
+
+if(temporaryMarker){
+map.removeLayer(temporaryMarker);
+temporaryMarker=null;
+}
+
+addCustomMarker(pin);
+
+renderPins();
+
+}
+
+function addCustomMarker(pin){
+
+const marker=L.marker(
+[pin.lat,pin.lng]
+).addTo(map);
+
+marker.bindPopup(
+`<strong>${pin.title}</strong><br>
+<span class="tag">${pin.category}</span>
+<br><br>
+${pin.notes||""}`
+);
+
+pin._marker=marker;
+
+}
+
+
+/* PIN LIST */
 
 function renderPins(){
 
-  const list=document.getElementById("pinList");
+const list=document.getElementById("pinList");
 
-  list.innerHTML="";
+list.innerHTML="";
 
-  data.pins.forEach((p,index)=>{
+data.pins.forEach((p,index)=>{
 
-    const div=document.createElement("div");
+const div=document.createElement("div");
 
-    div.className="pin";
+div.className="pin";
 
-    div.innerHTML=`
-      <div class="pin-top">
-        <strong>${p.title}</strong>
-        <span class="tag">${p.category}</span>
-      </div>
+div.innerHTML=`
+<div class="pin-top">
+<strong>${p.title}</strong>
+<span class="tag">${p.category}</span>
+</div>
 
-      <p>${p.notes || "No notes yet."}</p>
+<p>${p.notes||"No notes yet."}</p>
 
-      ${p.cost ? `<small>Estimated cost: £${p.cost}</small>`:""}
+<button class="secondary"
+onclick="showPin(${index})">
+Show on map
+</button>
 
-      <br><br>
+<button class="danger"
+onclick="deletePin(${index})">
+Delete
+</button>
+`;
 
-      <button class="secondary"
-        onclick="map.setView([${p.lat},${p.lng}],13);showPage('mapPage');">
-        Show on map
-      </button>
+list.appendChild(div);
 
-      <button class="danger"
-        onclick="deletePin(${index})">
-        Delete
-      </button>
-    `;
+});
 
-    list.appendChild(div);
+document.getElementById("savedCount")
+.innerText=data.pins.length;
 
-  });
-
-  document.getElementById("savedCount").innerText=data.pins.length;
 }
 
+function showPin(index){
+
+const p=data.pins[index];
+
+map.setView(
+[p.lat,p.lng],
+14
+);
+
+if(p._marker){
+p._marker.openPopup();
+}
+
+}
 
 function deletePin(index){
 
-  if(confirm("Delete this saved place?")){
+if(!confirm("Delete this saved place?"))return;
 
-    data.pins.splice(index,1);
+if(data.pins[index]._marker){
+map.removeLayer(
+data.pins[index]._marker
+);
+}
 
-    saveData();
+data.pins.splice(index,1);
 
-    renderPins();
+saveData();
 
-  }
+renderPins();
+
 }
 
 
 /* DISCOVER */
 
-const discoveries=[
-  ["🏕️","Campsites","Look for family-friendly campsites with suitable access for a high-roof campervan."],
-  ["🏔️","Mountains & Viewpoints","Bealach na Bà, mountain roads and spectacular Highland viewpoints."],
-  ["🏖️","Beaches","Achmelvich, Durness and Dunnet Bay are excellent places to investigate."],
-  ["🏰","Castles & History","Dunrobin Castle and historic Highland sites."],
-  ["🦌","Wildlife","Look for dolphins, seals, deer, seabirds and Highland wildlife."],
-  ["🌧️","Rainy Day Ideas","Caves, museums, visitor centres and indoor family attractions."],
-  ["🍔","Food Stops","Save restaurants, cafés, fish & chips and family-friendly food stops."],
-  ["⛽","Fuel","Save reliable fuel stops along the route."]
+const discoveryData=[
+
+["🏕️","Campsites",
+"Family-friendly campsites with suitable access for a high-roof campervan."],
+
+["🏖️","Beaches",
+"Achmelvich, Durness and Dunnet Bay are great places to investigate."],
+
+["🏔️","Viewpoints",
+"Highland viewpoints, mountain scenery and spectacular coastal views."],
+
+["🏰","Castles & History",
+"Dunrobin Castle and historic Highland sites."],
+
+["🦌","Wildlife",
+"Look for dolphins, seals, deer, seabirds and Highland wildlife."],
+
+["🌧️","Rainy Days",
+"Caves, museums and indoor family activities."],
+
+["🍔","Food",
+"Save cafés, restaurants, fish & chips and family-friendly food."],
+
+["⛽","Fuel",
+"Useful fuel stops around the route."]
 ];
 
 function renderDiscover(){
 
-  const container=document.getElementById("discoverList");
+const container=
+document.getElementById("discoverList");
 
-  container.innerHTML="";
+container.innerHTML="";
 
-  discoveries.forEach(d=>{
+discoveryData.forEach(d=>{
 
-    const card=document.createElement("div");
+const card=document.createElement("div");
 
-    card.className="card";
+card.className="card";
 
-    card.innerHTML=`
-      <h3>${d[0]} ${d[1]}</h3>
-      <p>${d[2]}</p>
-      <button class="secondary"
-        onclick="quickPin('${d[1]}')">
-        ＋ Add to Map
-      </button>
-    `;
+card.innerHTML=`
+<h3>${d[0]} ${d[1]}</h3>
+<p>${d[2]}</p>
+<button class="secondary"
+onclick="addDiscoverPin('${d[1]}')">
+＋ Save Place
+</button>
+`;
 
-    container.appendChild(card);
+container.appendChild(card);
 
-  });
+});
+
 }
 
+function addDiscoverPin(category){
 
-function quickPin(category){
+const title=prompt(
+`Name of ${category}:`
+);
 
-  const title=prompt(`Name of ${category}:`);
+if(!title)return;
 
-  if(!title) return;
+alert(
+"Now go to the Map and tap the exact location to save it."
+);
 
-  const notes=prompt("Notes:") || "";
+addingPin=true;
 
-  const lat=parseFloat(prompt("Latitude:"));
-
-  const lng=parseFloat(prompt("Longitude:"));
-
-  if(isNaN(lat)||isNaN(lng)){
-
-    alert("Invalid coordinates.");
-
-    return;
-  }
-
-  data.pins.push({
-    title,
-    category,
-    notes,
-    cost:"",
-    lat,
-    lng
-  });
-
-  saveData();
-
-  renderPins();
-
-  map.setView([lat,lng],12);
+showPage("mapPage");
 
 }
 
 
-/* TO-DO */
+/* TO DO */
 
 function renderTasks(){
 
-  const list=document.getElementById("taskList");
+const list=document.getElementById("taskList");
 
-  list.innerHTML="";
+list.innerHTML="";
 
-  data.tasks.forEach((task,index)=>{
+data.tasks.forEach((task,index)=>{
 
-    const div=document.createElement("div");
+const div=document.createElement("div");
 
-    div.className="task"+(task.done?" completed":"");
+div.className=
+"task"+(task.done?" completed":"");
 
-    div.innerHTML=`
-      <input type="checkbox"
-        ${task.done?"checked":""}
-        onchange="toggleTask(${index})">
+div.innerHTML=`
 
-      <span>${task.text}</span>
+<input type="checkbox"
+${task.done?"checked":""}
+onchange="toggleTask(${index})">
 
-      <button class="danger"
-        onclick="deleteTask(${index})">
-        ×
-      </button>
-    `;
+<span>${task.text}</span>
 
-    list.appendChild(div);
+<button class="danger"
+onclick="deleteTask(${index})">
+×
+</button>
+`;
 
-  });
+list.appendChild(div);
 
-  updateDashboard();
+});
+
+updateDashboard();
+
 }
-
 
 function toggleTask(index){
 
-  data.tasks[index].done=!data.tasks[index].done;
+data.tasks[index].done=
+!data.tasks[index].done;
 
-  saveData();
+saveData();
 
-  renderTasks();
+renderTasks();
+
 }
-
 
 function addTask(){
 
-  const task=prompt("Enter new task:");
+const text=prompt("New task:");
 
-  if(!task) return;
+if(!text)return;
 
-  data.tasks.push({
-    text:task,
-    done:false
-  });
+data.tasks.push({
+text,
+done:false
+});
 
-  saveData();
+saveData();
 
-  renderTasks();
+renderTasks();
+
 }
-
 
 function deleteTask(index){
 
-  data.tasks.splice(index,1);
+data.tasks.splice(index,1);
 
-  saveData();
+saveData();
 
-  renderTasks();
+renderTasks();
+
 }
 
 
@@ -871,74 +1072,78 @@ function deleteTask(index){
 
 function renderBudget(){
 
-  const list=document.getElementById("expenseList");
+const list=document.getElementById("expenseList");
 
-  list.innerHTML="";
+list.innerHTML="";
 
-  let total=0;
+let total=0;
 
-  data.expenses.forEach((e,index)=>{
+data.expenses.forEach((expense,index)=>{
 
-    total+=Number(e.amount)||0;
+total+=Number(expense.amount)||0;
 
-    const div=document.createElement("div");
+const div=document.createElement("div");
 
-    div.className="card";
+div.className="card";
 
-    div.innerHTML=`
-      <h3>${e.name}</h3>
-      <p>${e.category}</p>
-      <strong>£${Number(e.amount).toFixed(2)}</strong>
-      <br><br>
-      <button class="danger" onclick="deleteExpense(${index})">
-        Delete
-      </button>
-    `;
+div.innerHTML=`
+<h3>${expense.name}</h3>
+<p>${expense.category}</p>
+<strong>£${Number(expense.amount).toFixed(2)}</strong>
+<br><br>
+<button class="danger"
+onclick="deleteExpense(${index})">
+Delete
+</button>
+`;
 
-    list.appendChild(div);
+list.appendChild(div);
 
-  });
+});
 
-  document.getElementById("budgetTotal").innerText=total.toFixed(0);
-  document.getElementById("budgetTotal2").innerText=total.toFixed(2);
+document.getElementById("budgetTotal")
+.innerText=total.toFixed(0);
+
+document.getElementById("budgetTotal2")
+.innerText=total.toFixed(2);
 
 }
-
 
 function addExpense(){
 
-  const name=prompt("What is the expense?");
+const name=prompt("Expense:");
 
-  if(!name) return;
+if(!name)return;
 
-  const category=prompt(
-    "Category: Campsite / Fuel / Attraction / Food / Miscellaneous",
-    "Campsite"
-  ) || "Miscellaneous";
+const category=prompt(
+"Category:",
+"Campsite"
+)||"Miscellaneous";
 
-  const amount=prompt("Amount (£):");
+const amount=prompt("Amount (£):");
 
-  if(amount===null) return;
+if(amount===null)return;
 
-  data.expenses.push({
-    name,
-    category,
-    amount:Number(amount)||0
-  });
+data.expenses.push({
+name,
+category,
+amount:Number(amount)||0
+});
 
-  saveData();
+saveData();
 
-  renderBudget();
+renderBudget();
+
 }
-
 
 function deleteExpense(index){
 
-  data.expenses.splice(index,1);
+data.expenses.splice(index,1);
 
-  saveData();
+saveData();
 
-  renderBudget();
+renderBudget();
+
 }
 
 
@@ -946,121 +1151,126 @@ function deleteExpense(index){
 
 function renderItinerary(){
 
-  const list=document.getElementById("itineraryList");
+const list=
+document.getElementById("itineraryList");
 
-  list.innerHTML="";
+list.innerHTML="";
 
-  if(data.days.length===0){
+if(!data.days.length){
 
-    list.innerHTML=`
-      <div class="card">
-        <h3>No days planned yet</h3>
-        <p>Start building the trip by adding your first day.</p>
-      </div>
-    `;
+list.innerHTML=`
+<div class="card">
+<h3>No days planned yet</h3>
+<p>Add your first day to start building our route.</p>
+</div>
+`;
 
-    return;
-  }
+return;
 
-  data.days.forEach((day,index)=>{
-
-    const div=document.createElement("div");
-
-    div.className="itinerary-day";
-
-    div.innerHTML=`
-      <h3>Day ${index+1} — ${day.title}</h3>
-
-      <p>${day.notes || ""}</p>
-
-      <div>
-        ${day.stops.map(s=>`<div class="stop">📍 ${s}</div>`).join("")}
-      </div>
-
-      <br>
-
-      <button class="secondary"
-        onclick="addStop(${index})">
-        ＋ Add Stop
-      </button>
-
-      <button class="danger"
-        onclick="deleteDay(${index})">
-        Delete Day
-      </button>
-    `;
-
-    list.appendChild(div);
-
-  });
 }
 
+data.days.forEach((day,index)=>{
+
+const div=document.createElement("div");
+
+div.className="itinerary-day";
+
+div.innerHTML=`
+<h3>Day ${index+1} — ${day.title}</h3>
+
+<p>${day.notes||""}</p>
+
+${day.stops.map(
+s=>`<div class="stop">📍 ${s}</div>`
+).join("")}
+
+<br>
+
+<button class="secondary"
+onclick="addStop(${index})">
+＋ Add Stop
+</button>
+
+<button class="danger"
+onclick="deleteDay(${index})">
+Delete Day
+</button>
+`;
+
+list.appendChild(div);
+
+});
+
+}
 
 function addDay(){
 
-  const title=prompt(
-    "Day title:",
-    `Travel Day ${data.days.length+1}`
-  );
+const title=prompt(
+"Day title:",
+`Travel Day ${data.days.length+1}`
+);
 
-  if(!title) return;
+if(!title)return;
 
-  const notes=prompt("Notes for this day:") || "";
+const notes=prompt(
+"Notes for this day:"
+)||"";
 
-  data.days.push({
-    title,
-    notes,
-    stops:[]
-  });
+data.days.push({
+title,
+notes,
+stops:[]
+});
 
-  saveData();
+saveData();
 
-  renderItinerary();
+renderItinerary();
+
 }
 
+function addStop(index){
 
-function addStop(dayIndex){
+const stop=prompt("Add a stop:");
 
-  const stop=prompt("Add a stop:");
+if(!stop)return;
 
-  if(!stop) return;
+data.days[index].stops.push(stop);
 
-  data.days[dayIndex].stops.push(stop);
+saveData();
 
-  saveData();
+renderItinerary();
 
-  renderItinerary();
 }
-
 
 function deleteDay(index){
 
-  if(confirm("Delete this day?")){
+if(!confirm("Delete this day?"))return;
 
-    data.days.splice(index,1);
+data.days.splice(index,1);
 
-    saveData();
+saveData();
 
-    renderItinerary();
-  }
+renderItinerary();
+
 }
 
 
-/* CAMPERVAN */
+/* VAN */
 
 function saveVan(){
 
-  data.van={
-    name:document.getElementById("vanName").value,
-    height:document.getElementById("vanHeight").value,
-    length:document.getElementById("vanLength").value,
-    width:document.getElementById("vanWidth").value,
-    weight:document.getElementById("vanWeight").value
-  };
+data.van={
+name:document.getElementById("vanName").value,
+height:document.getElementById("vanHeight").value,
+length:document.getElementById("vanLength").value,
+width:document.getElementById("vanWidth").value,
+weight:document.getElementById("vanWeight").value
+};
 
-  saveData();
+saveData();
 
-  alert("Campervan details saved.");
+alert("Campervan details saved.");
+
 }
 
 
@@ -1068,41 +1278,51 @@ function saveVan(){
 
 function updateDashboard(){
 
-  const total=data.tasks.length;
+const done=data.tasks.filter(
+t=>t.done
+).length;
 
-  const done=data.tasks.filter(t=>t.done).length;
+const percent=data.tasks.length?
+Math.round(
+done/data.tasks.length*100
+):0;
 
-  const percent=total ? Math.round(done/total*100):0;
+document.getElementById("todoProgress")
+.innerText=percent+"%";
 
-  document.getElementById("todoProgress").innerText=percent+"%";
+const total=data.expenses.reduce(
+(sum,e)=>sum+(Number(e.amount)||0),
+0
+);
 
-  let budget=data.expenses.reduce(
-    (sum,e)=>sum+(Number(e.amount)||0),0
-  );
+document.getElementById("budgetTotal")
+.innerText=total.toFixed(0);
 
-  document.getElementById("budgetTotal").innerText=
-    budget.toFixed(0);
+document.getElementById("savedCount")
+.innerText=data.pins.length;
 
 }
 
 
 /* START */
 
-window.addEventListener("load",()=>{
+window.addEventListener("load",function(){
 
-  initMap();
+initMap();
 
-  renderPins();
+renderPins();
 
-  renderTasks();
+renderTasks();
 
-  renderBudget();
+renderBudget();
 
-  renderItinerary();
+renderItinerary();
 
-  renderDiscover();
+renderDiscover();
 
-  updateDashboard();
+updateDashboard();
+
+updateCountdown();
 
 });
 
